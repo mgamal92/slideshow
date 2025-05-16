@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Web Story Slider</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom right, #3e1c0f, #7c5842);
+      font-family: sans-serif;
+    }
+    .slider-wrapper {
+      position: relative;
+      width: 360px;
+      height: 640px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+      background-color: #000;
+    }
+    .story-slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      color: white;
+    }
+    .story-slide.active {
+      display: flex;
+      animation: fade 0.6s ease-in-out;
+    }
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .top-icons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .top-icons img { height: 30px; }
+    .icon-group {
+      display: flex;
+      gap: 10px;
+    }
+    .icon-group i {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 8px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .bottom-text {
+      font-size: 16px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px;
+      border-radius: 8px;
+    }
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .arrow-left { left: -45px; }
+    .arrow-right { right: -45px; }
+    .progress-container {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      gap: 4px;
+      z-index: 10;
+    }
+    .progress-segment {
+      flex: 1;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: orange;
+      transition: width 0.3s linear;
+    }
+  </style>
+</head>
+<body>
+  <div class="slider-wrapper">
+    <div class="progress-container" id="progressContainer"></div>
+
+    <!-- Slides -->
+    <!-- Slide 1 -->
+    <div class="story-slide active" style="background-image: url('https://images.unsplash.com/photo-1581368121328-3ff42f870eb3');">
+      <div class="top-icons">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/New_Logo_Travel_Channel.svg">
+        <div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div>
+      </div>
+      <div class="bottom-text">Budapest, Hungary: With its thermal baths, grand architecture, and evening Danube cruises.</div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="story-slide" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');">
+      <div class="top-icons">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/New_Logo_Travel_Channel.svg">
+        <div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div>
+      </div>
+      <div class="bottom-text">Lisbon, Portugal: Explore coastal beauty, iconic trams, and local cuisine in the sun.</div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="story-slide" style="background-image: url('https://images.unsplash.com/photo-1494475673543-6a6a27143b13');">
+      <div class="top-icons"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/New_Logo_Travel_Channel.svg"><div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div></div>
+      <div class="bottom-text">Prague, Czech Republic: Discover fairy-tale towers, bridges, and budget charm.</div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="story-slide" style="background-image: url('https://images.unsplash.com/photo-1573314989945-d366c7ef19a1');">
+      <div class="top-icons"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/New_Logo_Travel_Channel.svg"><div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div></div>
+      <div class="bottom-text">Kraków, Poland: A city of stories, squares, and splendid food — affordably!</div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="story-slide" style="background-image: url('https://images.unsplash.com/photo-1505761671935-60b3a7427bad');">
+      <div class="top-icons"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/New_Logo_Travel_Channel.svg"><div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div></div>
+      <div class="bottom-text">Athens, Greece: Ancient ruins meet modern cafés at budget-friendly prices.</div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="story-slide" style="background-image: url('https://images.unsplash.com/photo-1508923567004-3a6b8004f3d9');">
+      <div class="top-icons"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/New_Logo_Travel_Channel.svg"><div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div></div>
+      <div class="bottom-text">Dubrovnik, Croatia: Game of Thrones vibes with Adriatic views, affordably.</div>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="story-slide" style="background-image: url('https://images.unsplash.com/photo-1559561854-4c8e0c43c61f');">
+      <div class="top-icons"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/New_Logo_Travel_Channel.svg"><div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div></div>
+      <div class="bottom-text">Valencia, Spain: From oranges to paella to beach sunsets — for less.</div>
+    </div>
+
+    <!-- Slide 8 -->
+    <div class="story-slide" style="background-image: url('https://images.unsplash.com/photo-1603791440384-56cd371ee9a7');">
+      <div class="top-icons"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/New_Logo_Travel_Channel.svg"><div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div></div>
+      <div class="bottom-text">Sofia, Bulgaria: Unexpected architecture, mountains, and affordability.</div>
+    </div>
+
+    <!-- Arrows -->
+    <button class="arrow arrow-left" onclick="prevSlide()">◀</button>
+    <button class="arrow arrow-right" onclick="nextSlide()">▶</button>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.story-slide');
+    const progressContainer = document.getElementById('progressContainer');
+    let current = 0;
+    let interval;
+    let paused = false;
+    const duration = 5000;
+
+    slides.forEach((_, i) => {
+      const segment = document.createElement('div');
+      segment.classList.add('progress-segment');
+      const fill = document.createElement('div');
+      fill.classList.add('progress-fill');
+      fill.id = `progress-fill-${i}`;
+      segment.appendChild(fill);
+      progressContainer.appendChild(segment);
+    });
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+    }
+
+    function animateProgress(index) {
+      const fill = document.getElementById(`progress-fill-${index}`);
+      fill.style.transition = `width ${duration}ms linear`;
+      fill.style.width = '100%';
+    }
+
+    function resetProgress(index) {
+      const fill = document.getElementById(`progress-fill-${index}`);
+      fill.style.transition = 'none';
+      fill.style.width = '0%';
+    }
+
+    function nextSlide() {
+      resetProgress(current);
+      current = (current + 1) % slides.length;
+      showSlide(current);
+      animateProgress(current);
+    }
+
+    function prevSlide() {
+      resetProgress(current);
+      current = (current - 1 + slides.length) % slides.length;
+      showSlide(current);
+      animateProgress(current);
+    }
+
+    function startAutoPlay() {
+      animateProgress(current);
+      interval = setInterval(() => {
+        if (!paused) nextSlide();
+      }, duration);
+    }
+
+    document.querySelectorAll('.pauseBtn').forEach(btn => {
+      btn.onclick = () => {
+        paused = !paused;
+        btn.textContent = paused ? '▶️' : '⏸️';
+      };
+    });
+
+    showSlide(current);
+    startAutoPlay();
+  </script>
+</body>
+</html>
