@@ -109,68 +109,31 @@
 <body>
   <div class="slider-wrapper">
     <div class="progress-container" id="progressContainer"></div>
-
-    <!-- Slides -->
-    <!-- Slide 1 -->
-    <div class="story-slide active" style="background-image: url('https://images.unsplash.com/photo-1581368121328-3ff42f870eb3');">
-      <div class="top-icons">
-        <img src="https://static.india.com/wp-content/uploads/2025/05/Kotor-Montenegro.jpg?impolicy=Medium_Widthonly&w=400&h=800">
-        <div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div>
-      </div>
-      <div class="bottom-text">Budapest, Hungary: With its thermal baths, grand architecture, and evening Danube cruises.</div>
-    </div>
-
-    <!-- Slide 2 -->
-    <div class="story-slide" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');">
-      <div class="top-icons">
-        <img src="https://static.india.com/wp-content/uploads/2025/05/Kotor-Montenegro.jpg?impolicy=Medium_Widthonly&w=400&h=800">
-        <div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div>
-      </div>
-      <div class="bottom-text">Lisbon, Portugal: Explore coastal beauty, iconic trams, and local cuisine in the sun.</div>
-    </div>
-
-    <!-- Slide 3 -->
-    <div class="story-slide" style="background-image: url('https://images.unsplash.com/photo-1494475673543-6a6a27143b13');">
-      <div class="top-icons"><img src="https://static.india.com/wp-content/uploads/2025/05/Athens-Greece.jpg?impolicy=Medium_Widthonly&w=400&h=800"><div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div></div>
-      <div class="bottom-text">Prague, Czech Republic: Discover fairy-tale towers, bridges, and budget charm.</div>
-    </div>
-
-    <!-- Slide 4 -->
-    <div class="story-slide" style="background-image: url('https://images.unsplash.com/photo-1573314989945-d366c7ef19a1');">
-      <div class="top-icons"><img src="https://static.india.com/wp-content/uploads/2025/05/Sofia-Bulgaria.jpg?impolicy=Medium_Widthonly&w=400&h=800"><div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div></div>
-      <div class="bottom-text">Kraków, Poland: A city of stories, squares, and splendid food — affordably!</div>
-    </div>
-
-    <!-- Slide 5 -->
-    <div class="story-slide" style="background-image: url('https://images.unsplash.com/photo-1505761671935-60b3a7427bad');">
-      <div class="top-icons"><img src="https://static.india.com/wp-content/uploads/2025/05/ligd.jpg?impolicy=Medium_Widthonly&w=400&h=800"><div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div></div>
-      <div class="bottom-text">Athens, Greece: Ancient ruins meet modern cafés at budget-friendly prices.</div>
-    </div>
-
-    <!-- Slide 6 -->
-    <div class="story-slide" style="background-image: url('https://images.unsplash.com/photo-1508923567004-3a6b8004f3d9');">
-      <div class="top-icons"><img src="https://static.india.com/wp-content/uploads/2025/05/figl.jpg?impolicy=Medium_Widthonly&w=400&h=800"><div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div></div>
-      <div class="bottom-text">Dubrovnik, Croatia: Game of Thrones vibes with Adriatic views, affordably.</div>
-    </div>
-
-    <!-- Slide 7 -->
-    <div class="story-slide" style="background-image: url('https://images.unsplash.com/photo-1559561854-4c8e0c43c61f');">
-      <div class="top-icons"><img src="https://static.india.com/wp-content/uploads/2025/05/1st-2025-05-14T133229.490.jpg"><div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div></div>
-      <div class="bottom-text">Valencia, Spain: From oranges to paella to beach sunsets — for less.</div>
-    </div>
-
-    <!-- Slide 8 -->
-    <div class="story-slide" style="background-image: url('https://images.unsplash.com/photo-1603791440384-56cd371ee9a7');">
-      <div class="top-icons"><img src="https://static.india.com/wp-content/uploads/2025/05/Budapest-Hungary.jpg?impolicy=Medium_Widthonly&w=400&h=800"><div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div></div>
-      <div class="bottom-text">Sofia, Bulgaria: Unexpected architecture, mountains, and affordability.</div>
-    </div>
-
-    <!-- Arrows -->
-    <button class="arrow arrow-left" onclick="prevSlide()">◀</button>
-    <button class="arrow arrow-right" onclick="nextSlide()">▶</button>
   </div>
 
   <script>
+    const imageData = Array(8).fill({
+      image: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=720&q=80",
+      text: "Santorini, Greece: Stunning blue domes and cliffside sunsets on a budget."
+    });
+
+    const wrapper = document.querySelector('.slider-wrapper');
+
+    imageData.forEach((item, index) => {
+      const slide = document.createElement('div');
+      slide.className = 'story-slide';
+      if (index === 0) slide.classList.add('active');
+      slide.style.backgroundImage = `url('${item.image}')`;
+      slide.innerHTML = `
+        <div class="top-icons">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/New_Logo_Travel_Channel.svg">
+          <div class="icon-group"><i class="pauseBtn">⏸️</i><i>📤</i></div>
+        </div>
+        <div class="bottom-text">${item.text}</div>
+      `;
+      wrapper.appendChild(slide);
+    });
+
     const slides = document.querySelectorAll('.story-slide');
     const progressContainer = document.getElementById('progressContainer');
     let current = 0;
@@ -227,12 +190,14 @@
       }, duration);
     }
 
-    document.querySelectorAll('.pauseBtn').forEach(btn => {
-      btn.onclick = () => {
+    document.addEventListener('click', e => {
+      if (e.target.classList.contains('pauseBtn')) {
         paused = !paused;
-        btn.textContent = paused ? '▶️' : '⏸️';
-      };
+        e.target.textContent = paused ? '▶️' : '⏸️';
+      }
     });
+
+    wrapper.insertAdjacentHTML('beforeend', '<button class="arrow arrow-left" onclick="prevSlide()">◀</button><button class="arrow arrow-right" onclick="nextSlide()">▶</button>');
 
     showSlide(current);
     startAutoPlay();
